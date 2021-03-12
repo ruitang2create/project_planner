@@ -1,0 +1,25 @@
+.HomePortals {
+    position: relative;
+    text-align: center;
+    margin: 20px 0 10px 0;
+    top: 20em;
+}
+
+.homePortal {
+    height: 10vw;
+    width: 42.5%;
+}
+
+.newPlanBtn {
+    margin: auto auto auto 5%;
+}
+
+.myPlansBtn {
+    margin: auto 5% auto 5%;
+}
+
+.homeGreeting {
+    position: relative;
+    top: 5em;
+    padding-left: 5%;
+}

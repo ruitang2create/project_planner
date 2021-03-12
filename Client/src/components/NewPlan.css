@@ -1,0 +1,47 @@
+.newPlanPageTitle {
+    position: relative;
+    top: 2em;
+    padding-left: 5%;
+}
+
+.newPlanForm {
+    padding-left: 5%;
+    padding-right: 5%;
+    position: relative;
+    top: 6em;
+}
+
+.newPlanFormEachPart {
+    width: 100%;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    border-top: 1px solid grey;
+}
+
+.visionFormLabel {
+    width: fit-content;
+    margin-left: 1vw;
+    margin-right: 5px;
+}
+
+.visionForm {
+    width: 100%;
+}
+
+.visionFormRow {
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+#visionForm-for {
+    width: 80vw;
+}
+
+#visionForm-who {
+    width: 78vw;
+}
+
+.visionFormLabel.visionFormTextarea {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
