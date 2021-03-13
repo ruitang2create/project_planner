@@ -36,7 +36,7 @@ function NewPlan(props) {
 
     return (
         <div className='NewPlanPage'>
-            <h1 className='newPlanPageTitle'>New project plan</h1>
+            <h1 className='newPlanPageTitle'>New Project Plan</h1>
             <Form className='newPlanForm' onSubmit={handleSubmit}>
                 <Form.Group controlId='projectNameInput'>
                     <Form.Label>Project Name</Form.Label>
