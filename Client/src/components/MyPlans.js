@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Axios from 'axios';
 import host from '../lib/serverConfig';
@@ -27,31 +26,39 @@ function MyPlans() {
     useEffect(() => getPlans(), []);
 
     const renderPlans = () => {
-        const plansPerRow = 3;
-        const numRows = Math.ceil(plansList.length / plansPerRow);
-        const plansRows = [];
-        for (let i = 0; i < numRows; i++) {
-            let plansListThisRow = plansList.slice(i * plansPerRow, (i + 1) * plansPerRow);
-            let plansCols = plansListThisRow.map(plan =>
-                <Col key={plan.pid}>
-                    <div className='planThumbnailContainer'>
-                        {plan.name}
-                    </div>
-                </Col>
-            );
-            plansRows.push(<Row key={i}>{plansCols}</Row>);
-        }
+        // const plansPerRow = 3;
+        // const numRows = Math.ceil(plansList.length / plansPerRow);
+        // const plansRows = [];
+        // for (let i = 0; i < numRows; i++) {
+        //     let plansListThisRow = plansList.slice(i * plansPerRow, (i + 1) * plansPerRow);
+        //     let plansCols = plansListThisRow.map(plan =>
+        //         <div className="plansCol" key={plan.pid}>
+        //             <div className='planThumbnailContainer'>
+        //                 {plan.name}
+        //             </div>
+        //         </div>
+        //     );
+        //     plansRows.push(<div className="plansRow" key={i}>{plansCols}</div>);
+        // }
+        const plansRows = plansList.map(plan =>
+            <div className="plansCol" key={plan.pid}>
+                <div className='planThumbnailContainer'>
+                    {plan.name}
+                </div>
+            </div>
+        );
         return (
-            <Container className='plansListContainer'>
+            <div className='plansListContainer'>
                 {plansRows}
-            </Container>
+            </div>
         );
     }
 
     return (
         <div className='MyPlansPage'>
             <h1 className='myPlansPageTitle'>My Plans</h1>
-            { !isLoading && renderPlans()}
+            {!isLoading && renderPlans()}
+            <div className='plansBackground'></div>
         </div>
     );
 }

@@ -6,5 +6,48 @@
 
 .plansListContainer {
     position: relative;
-    top: 5em;
+    top: 10em;
+    text-align: center;
+    width: 100%;
+    margin-left: 5%;
+}
+
+.planThumbnailContainer {
+    width: 100%;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+.plansCol:hover .planThumbnailContainer {
+    color: white;
+}
+
+/* .plansRow {
+    width: 100%;
+    text-align: center;
+    margin: 0 2vw 0 2vw;
+} */
+
+.plansCol {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin: 2vw;
+    border-bottom: solid 1px rgb(180, 180, 180);
+    border-right: solid 1px rgb(221, 221, 221);
+    background: white;
+}
+
+.plansCol:hover {
+    border-top: solid 1px rgb(180, 180, 180);
+    border-left: solid 1px rgb(221, 221, 221);
+    border-bottom: none;
+    border-right: none;
+    background: rgb(88, 88, 88);
+}
+
+.plansBackground {
+    margin-top: 140px;
+    background: #f3f3f3;
+    height: 100vh;
 }
