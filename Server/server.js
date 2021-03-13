@@ -12,7 +12,7 @@ const port = 8080;
 
 const app = express();
 app.use(cors({
-  origin: ["http://projectplanner.ruitangcs.com","http://192.168.100.108:3000]"],
+  origin: ["http://projectplanner.ruitangcs.com","http://192.168.100.108:3000"],
   methods: ["GET", "POST"],
   credentials: true,
 }));

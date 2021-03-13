@@ -3,3 +3,8 @@
     top: 3em;
     padding-left: 5%;
 }
+
+.plansListContainer {
+    position: relative;
+    top: 5em;
+}

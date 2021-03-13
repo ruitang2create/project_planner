@@ -24,9 +24,7 @@ function MyPlans() {
             });
     }
 
-    useEffect(() => {
-        getPlans();
-    });
+    useEffect(() => getPlans(), []);
 
     const renderPlans = () => {
         const plansPerRow = 3;
@@ -41,7 +39,7 @@ function MyPlans() {
                     </div>
                 </Col>
             );
-            plansRows.push(<Row>{plansCols}</Row>);
+            plansRows.push(<Row key={i}>{plansCols}</Row>);
         }
         return (
             <Container className='plansListContainer'>

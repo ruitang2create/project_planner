@@ -4,3 +4,6 @@
 
 # Client Build
 /Client/build
+
+# Server Config
+/Client/src/lib/serverConfig.js
