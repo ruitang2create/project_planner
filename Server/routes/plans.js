@@ -44,4 +44,42 @@ router.post('/', (req, res) => {
   }
 });
 
+// Fetch all plans from DB.plans
+router.get('/', (req, res) => {
+  console.log('Incoming get request for all plans...');
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.log('Connection failed...');
+      console.log(err);
+      res.json({
+        success: false,
+        err: err,
+      });
+    } else {
+      console.log('Connection succeeded...');
+      console.log(pool._allConnections.length);
+      let queryStatement = `SELECT * FROM plans;`;
+      connection.query(queryStatement, (selectErr, selectData) => {
+        if (selectErr) {
+          console.log('failed at selecting all plans from plans table, err: ' + err);
+          res.json({
+            success: false,
+            err: err,
+          });
+          connection.destroy();
+        } else {
+          const plansData = selectData;
+          console.log('Retrieved Plans: ' + plansData);
+          res.json({
+            success: true,
+            plans: plansData,
+          });
+          connection.destroy();
+        }
+      });
+    }
+  });
+});
+
+
 module.exports = router;

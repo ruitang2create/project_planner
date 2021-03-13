@@ -1,3 +1,6 @@
 # npm dependencies
 /Client/node_modules
 /Server/node_modules
+
+# Client Build
+/Client/build
