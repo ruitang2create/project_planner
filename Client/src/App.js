@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,13 +7,28 @@ import {
 import Home from './components/Home';
 import NewPlan from './components/NewPlan';
 import MyPlans from './components/MyPlans';
+import Plan from './components/Plan';
 
 function App() {
+  const [planPid, setPlanPid] = useState(-1);
+  const [planName, setPlanName] = useState('');
+  const [planDesc, setPlanDesc] = useState('');
+  const [planVision, setPlanVision] = useState('');
+  const [planDate, setPlanDate] = useState(new Date().getTime());
+
+  const planPageSetter = (pid, name, desc, vision, date) => {
+    setPlanPid(pid);
+    setPlanName(name);
+    setPlanDesc(desc);
+    setPlanVision(vision);
+    setPlanDate(date);
+  }
+
   return (
     <Router>
       <Switch>
         <Route path='/' exact>
-          <Home 
+          <Home
             username={'Rui Tang'}
           />
         </Route>
@@ -21,7 +36,18 @@ function App() {
           <NewPlan />
         </Route>
         <Route path='/myplans' exact>
-          <MyPlans />
+          <MyPlans
+            planPageSetter={planPageSetter}
+          />
+        </Route>
+        <Route path='/plan' exact>
+          <Plan
+            pid={planPid}
+            name={planName}
+            desc={planDesc}
+            vision={planVision}
+            date={planDate}
+          />
         </Route>
       </Switch>
     </Router>

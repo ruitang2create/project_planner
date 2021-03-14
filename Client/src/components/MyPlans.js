@@ -4,7 +4,22 @@ import Axios from 'axios';
 import host from '../lib/serverConfig';
 import './MyPlans.css';
 
-function MyPlans() {
+const PlanThumbnail = withRouter((props) => {
+    const clickHandler = () => {
+        props.planPageSetter(props.pid, props.name, props.desc, props.vision, props.dateline);
+        props.history.push('/plan');
+    }
+
+    return (
+        <div className="plansCol" key={props.pid} onClick={clickHandler}>
+            <div className='planThumbnailContainer'>
+                {props.name}
+            </div>
+        </div>
+    );
+});
+
+function MyPlans(props) {
     Axios.defaults.withCredentials = true;
     const [isLoading, setIsLoading] = useState(true);
     const [plansList, setPlansList] = useState([]);
@@ -41,11 +56,15 @@ function MyPlans() {
         //     plansRows.push(<div className="plansRow" key={i}>{plansCols}</div>);
         // }
         const plansRows = plansList.map(plan =>
-            <div className="plansCol" key={plan.pid}>
-                <div className='planThumbnailContainer'>
-                    {plan.name}
-                </div>
-            </div>
+            <PlanThumbnail
+                key={plan.pid}
+                pid={plan.pid}
+                name={plan.name}
+                desc={plan.description}
+                vision={plan.vision}
+                dateline={plan.create_date}
+                planPageSetter={props.planPageSetter}
+            />
         );
         return (
             <div className='plansListContainer'>
