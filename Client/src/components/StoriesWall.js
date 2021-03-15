@@ -8,6 +8,7 @@ const StoriesWall = (props) => {
         return props.stories.map(story =>
             <UserStory
                 key={story.sid}
+                sid={story.sid}
                 title={story.title}
                 content={story.content}
                 priority={story.priority}

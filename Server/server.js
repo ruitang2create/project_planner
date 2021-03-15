@@ -8,12 +8,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const plansRouter = require('./routes/plans');
+const storiesRouter = require('./routes/stories');
 const port = 8080;
 
 const app = express();
 app.use(cors({
   origin: ["http://projectplanner.ruitangcs.com","http://192.168.100.108:3000"],
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
 
@@ -44,6 +45,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/plans', plansRouter);
+app.use('/stories', storiesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

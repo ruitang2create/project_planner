@@ -1,0 +1,18 @@
+#addNewStoryBtn {
+    margin: 10px auto 0 10px;
+}
+
+.planPageTitle {
+    text-align: center;
+    margin: 20px auto 20px auto;
+}
+
+.planBasicInfoContainer {
+    margin: 10px 10px 0 10px;
+}
+
+.planPageSubtitles {
+    width: fit-content;
+    border-bottom: 1px grey solid;
+    margin: 10px 0 10px 0;
+}
