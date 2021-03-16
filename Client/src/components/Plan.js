@@ -71,21 +71,27 @@ function Plan(props) {
     return (
         <div className='planPage'>
             <h1 className='planPageTitle'>{props.name}</h1>
-            <Accordion defaultActiveKey='1'>
+            <Accordion defaultActiveKey='2'>
                 <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="0">Basic Info</Accordion.Toggle>
+                    <Accordion.Toggle as={Card.Header} eventKey="0">
+                            <span className='planPageSubtitles'>Description</span></Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                         <div className='planBasicInfoContainer'>
-                            <h3 className='planPageSubtitles' id='planPageDescTitle'>Description</h3>
                             <div id='planPageDesc'>{props.desc}</div>
-                            <h3 className='planPageSubtitles' id='planPageVisionTitle'>Vision Statement</h3>
+                        </div>
+                    </Accordion.Collapse>
+                </Card>
+                <Card>
+                    <Accordion.Toggle as={Card.Header} eventKey="1"><span className='planPageSubtitles'>Vision Statement</span></Accordion.Toggle>
+                    <Accordion.Collapse eventKey="1">
+                        <div className='planBasicInfoContainer'>
                             <div id='planPageVision'>{props.vision}</div>
                         </div>
                     </Accordion.Collapse>
                 </Card>
                 <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="1">User Stories</Accordion.Toggle>
-                    <Accordion.Collapse eventKey="1">
+                    <Accordion.Toggle as={Card.Header} eventKey="2"><span className='planPageSubtitles'>User Stories</span></Accordion.Toggle>
+                    <Accordion.Collapse eventKey="2">
                         <div className='planUserStoriesContainer'>
                             <Button variant='dark' id='addNewStoryBtn' onClick={handleModalShow}>New Story</Button>
                             {
