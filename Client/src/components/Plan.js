@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Tabs, Tab, Button, Modal, Form, Col, InputGroup } from 'react-bootstrap';
+import { Card, Button, Modal, Form, Col, InputGroup, Accordion } from 'react-bootstrap';
 import StoriesWall from './StoriesWall';
 import Axios from 'axios';
 import host from '../lib/serverConfig';
@@ -14,6 +14,8 @@ function Plan(props) {
     const [newStoryContent, setNewStoryContent] = useState('');
     const [newStoryPriority, setNewStoryPriority] = useState('0');
     const [newStoryCost, setNewStoryCost] = useState(0);
+
+    const [toLoadStories, setToLoadStories] = useState(true);
 
     const [showModal, setShowModal] = useState(false);
     const handleModalClose = () => setShowModal(false);
@@ -49,6 +51,7 @@ function Plan(props) {
         }).then(res => {
             if (res.data.success) {
                 alert(`User Story${res.data.sid} 创建成功！`);
+                setToLoadStories(true);
             } else {
                 alert('创建失败！');
                 console.log('Failed to add new story: ' + res.data.err);
@@ -58,28 +61,41 @@ function Plan(props) {
         });
     }
 
-    useEffect(() => getStories(), []);
+    useEffect(() => {
+        if (toLoadStories) {
+            getStories();
+            setToLoadStories(false);
+        }
+    }, [toLoadStories]);
 
     return (
         <div className='planPage'>
             <h1 className='planPageTitle'>{props.name}</h1>
-            <Tabs >
-                <Tab eventKey='basic' title='Basic Info'>
-                    <div className='planBasicInfoContainer'>
-                        <h3 className='planPageSubtitles' id='planPageDescTitle'>Description</h3>
-                        <div id='planPageDesc'>{props.desc}</div>
-                        <h3 className='planPageSubtitles' id='planPageVisionTitle'>Vision Statement</h3>
-                        <div id='planPageVision'>{props.vision}</div>
-                    </div>
-                </Tab>
-                <Tab eventKey='stories' title='User Stories'>
-                    <Button variant='dark' id='addNewStoryBtn' onClick={handleModalShow}>New Story</Button>
-                    {
-                        !isLoading &&
-                        <StoriesWall
-                            stories={stories}
-                        />
-                    }
+            <Accordion defaultActiveKey='1'>
+                <Card>
+                    <Accordion.Toggle as={Card.Header} eventKey="0">Basic Info</Accordion.Toggle>
+                    <Accordion.Collapse eventKey="0">
+                        <div className='planBasicInfoContainer'>
+                            <h3 className='planPageSubtitles' id='planPageDescTitle'>Description</h3>
+                            <div id='planPageDesc'>{props.desc}</div>
+                            <h3 className='planPageSubtitles' id='planPageVisionTitle'>Vision Statement</h3>
+                            <div id='planPageVision'>{props.vision}</div>
+                        </div>
+                    </Accordion.Collapse>
+                </Card>
+                <Card>
+                    <Accordion.Toggle as={Card.Header} eventKey="1">User Stories</Accordion.Toggle>
+                    <Accordion.Collapse eventKey="1">
+                        <div className='planUserStoriesContainer'>
+                            <Button variant='dark' id='addNewStoryBtn' onClick={handleModalShow}>New Story</Button>
+                            {
+                                !isLoading &&
+                                <StoriesWall
+                                    stories={stories}
+                                />
+                            }
+                        </div>
+                    </Accordion.Collapse>
                     <Modal show={showModal} onHide={handleModalClose} centered >
                         <Modal.Header closeButton>
                             <Modal.Title>New User Story</Modal.Title>
@@ -152,11 +168,9 @@ function Plan(props) {
                                 <Button variant='dark' type='submit'>Create</Button>
                             </Form>
                         </Modal.Body>
-                        <Modal.Footer>
-                        </Modal.Footer>
                     </Modal>
-                </Tab>
-            </Tabs>
+                </Card>
+            </Accordion>
         </div>
     );
 }
