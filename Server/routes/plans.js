@@ -44,6 +44,48 @@ router.post('/', (req, res) => {
   }
 });
 
+// Update the description and vision statement of a plan in DB.plans
+router.put('/:pid', (req, res) => {
+  console.log('Incoming put request...');
+  const pid = req.params.pid;
+  const { description, vision } = req.body;
+  console.log(description, vision);
+  if (description && vision) {
+      pool.getConnection((err, connection) => {
+          if (err) {
+              console.log('Connection failed...');
+              console.log(err);
+              res.json({
+                  success: false,
+                  err: err,
+              });
+          } else {
+              console.log('Connection succeeded...');
+              console.log(pool._allConnections.length);
+              let queryStatement = `UPDATE plans SET description='${description}', vision='${vision}' WHERE pid=${pid};`;
+              console.log('New attempt: \n' + queryStatement);
+              connection.query(queryStatement, (updateErr, updateData) => {
+                  if (updateErr) {
+                      console.log('failed to updat plan' + pid + ', err: ' + err);
+                      res.json({
+                          success: false,
+                          err: err,
+                      });
+                      connection.destroy();
+                  } else {
+                      console.log('Update feedback: ' + JSON.stringify(updateData));
+                      console.log('Plan' + pid + ' updated...');
+                      res.json({
+                          success: true,
+                      });
+                      connection.destroy();
+                  }
+              });
+          }
+      });
+  }
+});
+
 // Fetch all plans from DB.plans
 router.get('/', (req, res) => {
   console.log('Incoming get request for all plans...');

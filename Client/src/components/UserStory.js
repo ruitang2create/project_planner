@@ -57,6 +57,7 @@ const UserStory = (props) => {
 
     const checkboxHandler = () => {
         setFinished(!finished);
+        setToUpdate(true);
     }
 
     useEffect(() => {

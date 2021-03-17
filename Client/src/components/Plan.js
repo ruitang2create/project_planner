@@ -5,6 +5,7 @@ import StoriesWall from './StoriesWall';
 import Axios from 'axios';
 import host from '../lib/serverConfig';
 import './Plan.css';
+import editIcon from '../assets/imgs/editIcon_black.png';
 
 function Plan(props) {
     Axios.defaults.withCredentials = true;
@@ -20,6 +21,31 @@ function Plan(props) {
     const [showModal, setShowModal] = useState(false);
     const handleModalClose = () => setShowModal(false);
     const handleModalShow = () => setShowModal(true);
+
+    const [tempDesc, setTempDesc] = useState(props.desc);
+    const [tempVision, setTempVision] = useState(props.vision);
+
+    const [showDescEditModal, setShowDescEditModal] = useState(false);
+    const handleDescEditModalClose = () => setShowDescEditModal(false);
+    const handleDescEditModalShow = () => setShowDescEditModal(true);
+
+    const [showVisionEditModal, setShowVisionEditModal] = useState(false);
+    const handleVisionEditModalClose = () => setShowVisionEditModal(false);
+    const handleVisionEditModalShow = () => setShowVisionEditModal(true);
+
+    const planDescUpdater = (e) => {
+        e.preventDefault();
+        props.descSetter(tempDesc);
+        props.updateWatcher(true);
+        handleDescEditModalClose();
+    }
+
+    const planVisionUpdater = (e) => {
+        e.preventDefault();
+        props.visionSetter(tempVision);
+        props.updateWatcher(true);
+        handleVisionEditModalClose();
+    }
 
     const getStories = () => {
         console.log('Fetching stories of Project' + props.pid + '...');
@@ -74,20 +100,63 @@ function Plan(props) {
             <Accordion defaultActiveKey='2'>
                 <Card>
                     <Accordion.Toggle as={Card.Header} eventKey="0">
-                            <span className='planPageSubtitles'>Description</span></Accordion.Toggle>
+                        <span className='planPageSubtitles'>Description</span></Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                         <div className='planBasicInfoContainer'>
                             <div id='planPageDesc'>{props.desc}</div>
+                            <img className='storyEditBtn' alt='img' src={editIcon} onClick={handleDescEditModalShow} />
                         </div>
                     </Accordion.Collapse>
+                    <Modal show={showDescEditModal} onHide={handleDescEditModalClose} centered >
+                        <Modal.Header closeButton>
+                            <Modal.Title>Edit Description</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form className='planDescEditForm' onSubmit={planDescUpdater}>
+                                <Form.Group className='planEditInputContainer' contorlId='planDescEditInputContainer'>
+                                    <Form.Label>Description</Form.Label>
+                                    <Form.Control
+                                        className='planDescEditInput'
+                                        value={tempDesc}
+                                        onChange={e => setTempDesc(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
+                                <Button variant='light' onClick={handleDescEditModalClose}>Cancel</Button>
+                                <Button variant='dark' type='submit'>Update</Button>
+                            </Form>
+                        </Modal.Body>
+                    </Modal>
                 </Card>
                 <Card>
                     <Accordion.Toggle as={Card.Header} eventKey="1"><span className='planPageSubtitles'>Vision Statement</span></Accordion.Toggle>
                     <Accordion.Collapse eventKey="1">
                         <div className='planBasicInfoContainer'>
                             <div id='planPageVision'>{props.vision}</div>
+                            <img className='storyEditBtn' alt='img' src={editIcon} onClick={handleVisionEditModalShow} />
                         </div>
                     </Accordion.Collapse>
+                    <Modal show={showVisionEditModal} onHide={handleVisionEditModalClose} centered >
+                        <Modal.Header closeButton>
+                            <Modal.Title>Edit Vision Statement</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form className='planVisionEditForm' onSubmit={planVisionUpdater}>
+                                <Form.Group className='planEditInputContainer' contorlId='planVisionEditInputContainer'>
+                                    <Form.Label>Vision Statement</Form.Label>
+                                    <Form.Control
+                                        as='textarea'
+                                        className='planVisionEditInput'
+                                        value={tempVision}
+                                        onChange={e => setTempVision(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
+                                <Button variant='light' onClick={handleVisionEditModalClose}>Cancel</Button>
+                                <Button variant='dark' type='submit'>Update</Button>
+                            </Form>
+                        </Modal.Body>
+                    </Modal>
                 </Card>
                 <Card>
                     <Accordion.Toggle as={Card.Header} eventKey="2"><span className='planPageSubtitles'>User Stories</span></Accordion.Toggle>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,6 +8,8 @@ import Home from './components/Home';
 import NewPlan from './components/NewPlan';
 import MyPlans from './components/MyPlans';
 import Plan from './components/Plan';
+import Axios from 'axios';
+import host from './lib/serverConfig';
 
 function App() {
   const [planPid, setPlanPid] = useState(-1);
@@ -15,6 +17,32 @@ function App() {
   const [planDesc, setPlanDesc] = useState('');
   const [planVision, setPlanVision] = useState('');
   const [planDate, setPlanDate] = useState(new Date().getTime());
+  const [toUpdatePlan, setToUpdatePlan] = useState(false);
+
+  const planUpdater = () => {
+    console.log('Sending request to update plan...');
+    const apiUrl = `${host}/plans/${planPid}`;
+    Axios.put(apiUrl, {
+      description: planDesc,
+      vision: planVision,
+    }).then(res => {
+      if (res.data.success) {
+        console.log('Plan updated!');
+        setToUpdatePlan(false);
+      } else {
+        console.log('Update failed!');
+        console.log('Plan update err: ' + res.data.err);
+      }
+    }).catch(err => {
+      console.log('Axios PUT request err:' + err);
+    });
+  }
+
+  useEffect(() => {
+    if(toUpdatePlan) {
+      planUpdater();
+    }
+  }, [toUpdatePlan]);
 
   const planPageSetter = (pid, name, desc, vision, date) => {
     setPlanPid(pid);
@@ -47,6 +75,9 @@ function App() {
             desc={planDesc}
             vision={planVision}
             date={planDate}
+            descSetter={setPlanDesc}
+            visionSetter={setPlanVision}
+            updateWatcher={setToUpdatePlan}
           />
         </Route>
       </Switch>

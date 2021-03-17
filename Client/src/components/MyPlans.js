@@ -24,6 +24,8 @@ function MyPlans(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [plansList, setPlansList] = useState([]);
 
+    // const text = ()
+    
     const getPlans = () => {
         console.log('Fetching plans from server...');
         const apiUrl = `${host}/plans`;
@@ -41,20 +43,6 @@ function MyPlans(props) {
     useEffect(() => getPlans(), []);
 
     const renderPlans = () => {
-        // const plansPerRow = 3;
-        // const numRows = Math.ceil(plansList.length / plansPerRow);
-        // const plansRows = [];
-        // for (let i = 0; i < numRows; i++) {
-        //     let plansListThisRow = plansList.slice(i * plansPerRow, (i + 1) * plansPerRow);
-        //     let plansCols = plansListThisRow.map(plan =>
-        //         <div className="plansCol" key={plan.pid}>
-        //             <div className='planThumbnailContainer'>
-        //                 {plan.name}
-        //             </div>
-        //         </div>
-        //     );
-        //     plansRows.push(<div className="plansRow" key={i}>{plansCols}</div>);
-        // }
         const plansRows = plansList.map(plan =>
             <PlanThumbnail
                 key={plan.pid}
