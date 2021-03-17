@@ -9,6 +9,11 @@ import editIcon from '../assets/imgs/editIcon_black.png';
 
 function Plan(props) {
     Axios.defaults.withCredentials = true;
+
+    const [pageRendered, setPageRendered] = useState(false);
+
+    const [visionFormatted, setVisionFormatted] = useState(false);
+
     const [isLoading, setIsLoading] = useState(true);
     const [stories, setStories] = useState([]);
     const [newStoryTitle, setNewStoryTitle] = useState('');
@@ -45,6 +50,13 @@ function Plan(props) {
         props.visionSetter(tempVision);
         props.updateWatcher(true);
         handleVisionEditModalClose();
+    }
+
+    const visionTextFormatter = () => {
+        const newLineRegex = /(\r\n|\n)/g;
+        const formattedText = props.vision.replace(newLineRegex, '<br>');
+        document.getElementById('planPageVision').innerHTML = formattedText;
+        setVisionFormatted(true);
     }
 
     const getStories = () => {
@@ -93,6 +105,16 @@ function Plan(props) {
             setToLoadStories(false);
         }
     }, [toLoadStories]);
+
+    useEffect(() => {
+        if (pageRendered) {
+            if (!visionFormatted) {
+                visionTextFormatter();
+            }
+        } else {
+            setPageRendered(true);
+        }
+    });
 
     return (
         <div className='planPage'>

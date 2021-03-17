@@ -76,14 +76,14 @@ const UserStory = (props) => {
 
     return (
         <div className='userStory'>
-            <Card >
+            <Card className='storyMainContainer'>
                 <Card.Header>
                     <div classNmae='storyTitleContainer'>
                         <h4 className='storyTitleDisplay'>{title}</h4>
                         <img className='storyEditBtn' alt='img' src={editIcon} onClick={handleModalShow} />
                     </div>
                 </Card.Header>
-                <Card.Body>
+                <Card.Body className='storyCoreContainer'>
                     <div className='storySectionMid'>
                         <div className='storyContentDisplay'>
                             <Card.Text><span style={{ fontSize: '18px' }}>{content}</span></Card.Text>
