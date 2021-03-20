@@ -52,6 +52,7 @@ const UserStory = (props) => {
         event.preventDefault();
         setTitle(tempTitle);
         setContent(tempContent);
+        setHourCost(tempHourCost);
         setToUpdate(true);
         handleModalClose();
     }
@@ -105,8 +106,10 @@ const UserStory = (props) => {
                 </Card.Body>
                 <Card.Body>
                     <div className='storySectionBot'>
-                        <div className='storyCostDisplay' >{`Est. ${hourCost} hrs`}</div>
-                        <div className='storyCheckboxContainer'>
+                        <div className='storyCostDisplay' >
+                            <span className='storyCostText'>{`Est. ${hourCost} hrs`}</span>
+                        </div>
+                        <div className='storyCheckboxContainer' onClick={checkboxHandler}>
                             <span className='storyCheckboxContainerLabel'>{'Done '}</span>
                             <Checkbox checked={finished} clickHandler={checkboxHandler} />
                         </div>
@@ -135,6 +138,15 @@ const UserStory = (props) => {
                                 className='storyUpdateContentInput'
                                 value={tempContent}
                                 onChange={e => setTempContent(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className='storyUpdateInputContainer' contorlId='storyUpdateCostInputContainer'>
+                            <Form.Label>Time Cost</Form.Label>
+                            <Form.Control
+                                className='storyUpdateCostInput'
+                                value={tempHourCost}
+                                onChange={e => setTempHourCost(e.target.value)}
                                 required
                             />
                         </Form.Group>

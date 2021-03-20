@@ -110,3 +110,7 @@
 .storyEditBtn:hover {
     filter: drop-shadow(0 0 0 black);
 }
+
+.storyCheckboxContainer:hover {
+    filter: drop-shadow(0 0 0 black);
+}
