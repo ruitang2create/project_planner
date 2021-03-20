@@ -7,3 +7,6 @@
 
 # Server Config
 /Client/src/lib/serverConfig.js
+
+# Page Protection Credentials
+/Client/src/lib/lock.js
