@@ -87,6 +87,76 @@ router.put('/:sid', (req, res) => {
     }
 });
 
+// Delete story with given sid from DB.stories
+router.delete('/:sid', (req, res) => {
+    const sid = req.params.sid;
+    console.log('Incoming delete request for story' + sid + '...');
+    pool.getConnection((err, connection) => {
+        if (err) {
+            console.log('Connection failed...\nError: ' + err);
+            res.json({
+                success: false,
+                err: err,
+            });
+        } else {
+            console.log('Connection succeeded...');
+            console.log(pool._allConnections.length);
+            let queryStatement = `DELETE FROM stories WHERE sid=${sid};`;
+            connection.query(queryStatement, (deleteErr, deleteData) => {
+                if (deleteErr) {
+                    console.log('failed at deleting target story from stories table, err: ' + deleteErr);
+                    res.json({
+                        success: false,
+                        err: deleteErr,
+                    });
+                    connection.destroy();
+                } else {
+                    console.log(`Story${sid}: deleted...`);
+                    res.json({
+                        success: true,
+                    });
+                    connection.destroy();
+                }
+            });
+        }
+    });
+});
+
+// Delete story with given sid from DB.stories
+router.delete('/plan/:pid', (req, res) => {
+    const pid = req.params.pid;
+    console.log('Incoming delete request for stories of plan' + pid + '...');
+    pool.getConnection((err, connection) => {
+        if (err) {
+            console.log('Connection failed...\nError: ' + err);
+            res.json({
+                success: false,
+                err: err,
+            });
+        } else {
+            console.log('Connection succeeded...');
+            console.log(pool._allConnections.length);
+            let queryStatement = `DELETE FROM stories WHERE pid=${pid};`;
+            connection.query(queryStatement, (deleteErr, deleteData) => {
+                if (deleteErr) {
+                    console.log('failed at deleting target stories from stories table, err: ' + deleteErr);
+                    res.json({
+                        success: false,
+                        err: deleteErr,
+                    });
+                    connection.destroy();
+                } else {
+                    console.log(`Stories of plan${pid}: deleted...`);
+                    res.json({
+                        success: true,
+                    });
+                    connection.destroy();
+                }
+            });
+        }
+    });
+});
+
 // Fetch all stories with given pid from DB.stories
 router.get('/:pid', (req, res) => {
     const pid = req.params.pid;

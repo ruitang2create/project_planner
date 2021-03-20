@@ -101,10 +101,14 @@
     overflow: hidden;
 }
 
+.closeDropdown {
+    float: right;
+}
 .storyEditBtn {
     width: 20px;
     float: right;
     margin-top: 5px;
+    padding-left: 1px;
 }
 
 .storyEditBtn:hover {
@@ -112,5 +116,14 @@
 }
 
 .storyCheckboxContainer:hover {
+    filter: drop-shadow(0 0 0 black);
+}
+
+.storyDeleteBtn {
+    width: 20px;
+    margin-left: 0;
+}
+
+.storyDeleteBtn:hover {
     filter: drop-shadow(0 0 0 black);
 }

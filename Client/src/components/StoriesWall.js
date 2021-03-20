@@ -14,6 +14,7 @@ const StoriesWall = (props) => {
                 priority={story.priority}
                 hourCost={story.hours_cost}
                 finished={story.finished}
+                reloadStory={props.reloadStories}
             />
         );
     }

@@ -6,6 +6,7 @@ import Axios from 'axios';
 import host from '../lib/serverConfig';
 import './Plan.css';
 import editIcon from '../assets/imgs/editIcon_black.png';
+import deleteIcon from '../assets/imgs/deleteIcon_red.png';
 import TopNav from './TopNav';
 
 function Plan(props) {
@@ -38,6 +39,10 @@ function Plan(props) {
     const [showVisionEditModal, setShowVisionEditModal] = useState(false);
     const handleVisionEditModalClose = () => setShowVisionEditModal(false);
     const handleVisionEditModalShow = () => setShowVisionEditModal(true);
+
+    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    const handleDeleteModalClose = () => setDeleteModalShow(false);
+    const handleDeleteModalShow = () => setDeleteModalShow(true);
 
     const planDescUpdater = (e) => {
         e.preventDefault();
@@ -102,6 +107,35 @@ function Plan(props) {
             }
         }).catch(err => {
             console.log('Axios POST request error: ' + err);
+        });
+    }
+
+    const deletePlanHandler = () => {
+        handleDeleteModalClose();
+        let apiUrl = `${host}/stories/plan/${props.pid}`;
+        Axios.delete(apiUrl).then(res => {
+            console.log('Deleting stories of plan' + props.pid + '...');
+            if (res.data.success) {
+                console.log('Stories of plan' + props.pid + ' deleted!');
+                apiUrl = `${host}/plans/${props.pid}`;
+                Axios.delete(apiUrl).then(res => {
+                    console.log('Deleting plan' + props.pid + '...');
+                    if (res.data.success) {
+                        alert('Plan deleted!');
+                        props.history.push('/myplans');
+                    } else {
+                        console.log('Failed to delete plan!');
+                        console.log('Plan deletion err: ' + res.data.err);
+                    }
+                }).catch(err => {
+                    console.log('Axios DELETE request err:' + err);
+                });
+            } else {
+                console.log('Failed to delete stories of the plan!');
+                console.log('Stories deletion err: ' + res.data.err);
+            }
+        }).catch(err => {
+            console.log('Axios DELETE request err:' + err);
         });
     }
 
@@ -197,6 +231,7 @@ function Plan(props) {
                                 !isLoading &&
                                 <StoriesWall
                                     stories={stories}
+                                    reloadStories={setToLoadStories}
                                 />
                             }
                         </div>
@@ -276,6 +311,19 @@ function Plan(props) {
                     </Modal>
                 </Card>
             </Accordion>
+            <div className='planDeleteBtnContainer'>
+                <img className='planDeleteBtn' alt='img' src={deleteIcon} onClick={handleDeleteModalShow} />
+            </div>
+            <Modal show={deleteModalShow} onHide={handleDeleteModalClose} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm</Modal.Title>
+                </Modal.Header>
+                <Modal.Body><p>Are you sure to <span><strong>delete</strong></span> this plan?</p></Modal.Body>
+                <Modal.Footer>
+                    <Button variant='light' onClick={handleDeleteModalClose}>Cancel</Button>
+                    <Button variant='danger' onClick={deletePlanHandler}>DELETE</Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

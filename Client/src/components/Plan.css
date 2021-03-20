@@ -34,3 +34,18 @@
 .planEditBtn:hover {
     filter: drop-shadow(0 0 0 black);
 }
+
+.planDeleteBtnContainer {
+    width: 100%;
+    margin: 20px 0 20px 0;
+    text-align: center;
+}
+
+.planDeleteBtn:hover {
+    opacity: 1;
+}
+
+.planDeleteBtn {
+    width: 10%;
+    opacity: 0.2;
+}

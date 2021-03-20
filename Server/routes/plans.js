@@ -127,7 +127,7 @@ router.get('/', (req, res) => {
 router.delete('/:pid', (req, res) => {
   const pid = req.params.pid;
   console.log('Incoming delete request for plans' + pid + '...');
-  pool.connection((err, connection) => {
+  pool.getConnection((err, connection) => {
     if (err) {
       console.log('Connection failed...\nError: ' + err);
       res.json({
