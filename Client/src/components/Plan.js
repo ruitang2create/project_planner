@@ -6,6 +6,7 @@ import Axios from 'axios';
 import host from '../lib/serverConfig';
 import './Plan.css';
 import editIcon from '../assets/imgs/editIcon_black.png';
+import TopNav from './TopNav';
 
 function Plan(props) {
     Axios.defaults.withCredentials = true;
@@ -40,14 +41,14 @@ function Plan(props) {
 
     const planDescUpdater = (e) => {
         e.preventDefault();
-        props.descSetter(tempDesc);
+        props.descSetter(uploadTextFormatter(tempDesc));
         props.updateWatcher(true);
         handleDescEditModalClose();
     }
 
     const planVisionUpdater = (e) => {
         e.preventDefault();
-        props.visionSetter(tempVision);
+        props.visionSetter(uploadTextFormatter(tempVision));
         props.updateWatcher(true);
         handleVisionEditModalClose();
     }
@@ -57,6 +58,11 @@ function Plan(props) {
         const formattedText = props.vision.replace(newLineRegex, '<br>');
         document.getElementById('planPageVision').innerHTML = formattedText;
         setVisionFormatted(true);
+    }
+
+    const uploadTextFormatter = (text) => {
+        const formattedText = text.replace('"', '""');
+        return formattedText;
     }
 
     const getStories = () => {
@@ -92,7 +98,7 @@ function Plan(props) {
                 setToLoadStories(true);
             } else {
                 alert('创建失败！');
-                console.log('Failed to add new story: ' + res.data.err);
+                console.log('Failed to add new story: ' + JSON.stringify(res.data.err));
             }
         }).catch(err => {
             console.log('Axios POST request error: ' + err);
@@ -118,6 +124,7 @@ function Plan(props) {
 
     return (
         <div className='planPage'>
+            <TopNav />
             <h1 className='planPageTitle'>{props.name}</h1>
             <Accordion defaultActiveKey='2'>
                 <Card>
@@ -125,8 +132,8 @@ function Plan(props) {
                         <span className='planPageSubtitles'>Description</span></Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                         <div className='planBasicInfoContainer'>
-                            <div id='planPageDesc'>{props.desc}</div>
-                            <img className='storyEditBtn' alt='img' src={editIcon} onClick={handleDescEditModalShow} />
+                            <div className='planBasicText' id='planPageDesc'>{props.desc}</div>
+                            <img className='planEditBtn' alt='img' src={editIcon} onClick={handleDescEditModalShow} />
                         </div>
                     </Accordion.Collapse>
                     <Modal show={showDescEditModal} onHide={handleDescEditModalClose} centered >
@@ -154,8 +161,8 @@ function Plan(props) {
                     <Accordion.Toggle as={Card.Header} eventKey="1"><span className='planPageSubtitles'>Vision Statement</span></Accordion.Toggle>
                     <Accordion.Collapse eventKey="1">
                         <div className='planBasicInfoContainer'>
-                            <div id='planPageVision'>{props.vision}</div>
-                            <img className='storyEditBtn' alt='img' src={editIcon} onClick={handleVisionEditModalShow} />
+                            <div className='planBasicText' id='planPageVision'>{props.vision}</div>
+                            <img className='planEditBtn' alt='img' src={editIcon} onClick={handleVisionEditModalShow} />
                         </div>
                     </Accordion.Collapse>
                     <Modal show={showVisionEditModal} onHide={handleVisionEditModalClose} centered >

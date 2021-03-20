@@ -18,3 +18,19 @@
     /* border-bottom: 1px grey solid; */
     /* margin: 10px 0 10px 0; */
 }
+
+.planBasicText {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+.planEditBtn {
+    width: 20px;
+    float: right;
+    margin-bottom: 10px;
+}
+
+.planEditBtn:hover {
+    filter: drop-shadow(0 0 0 black);
+}

@@ -20,14 +20,14 @@ router.post('/:pid', (req, res) => {
             } else {
                 console.log('Connection succeeded...');
                 console.log(pool._allConnections.length);
-                let queryStatement = `INSERT INTO stories (pid, title, content, priority, hours_cost, finished) VALUES (${pid}, '${title}', '${content}', ${priority}, ${hours_cost}, ${finished});`;
+                let queryStatement = `INSERT INTO stories (pid, title, content, priority, hours_cost, finished) VALUES (${pid}, "${title}", "${content}", ${priority}, ${hours_cost}, ${finished});`;
                 queryStatement += `SELECT LAST_INSERT_ID();`;
                 connection.query(queryStatement, (insertErr, insertData) => {
                     if (insertErr) {
-                        console.log('failed at insertion into stories table, err: ' + err);
+                        console.log('failed at insertion into stories table, err: ' + insertErr);
                         res.json({
                             success: false,
-                            err: err,
+                            err: insertErr,
                         });
                         connection.destroy();
                     } else {
@@ -63,14 +63,14 @@ router.put('/:sid', (req, res) => {
             } else {
                 console.log('Connection succeeded...');
                 console.log(pool._allConnections.length);
-                let queryStatement = `UPDATE stories SET title='${title}', content='${content}', priority=${priority}, hours_cost=${hours_cost}, finished=${finished} WHERE sid=${sid};`;
+                let queryStatement = `UPDATE stories SET title="${title}", content="${content}", priority=${priority}, hours_cost=${hours_cost}, finished=${finished} WHERE sid=${sid};`;
                 console.log('New attempt: \n' + queryStatement);
                 connection.query(queryStatement, (updateErr, updateData) => {
                     if (updateErr) {
-                        console.log('failed to updat story' + sid + ', err: ' + err);
+                        console.log('failed to updat story' + sid + ', err: ' + updateErr);
                         res.json({
                             success: false,
-                            err: err,
+                            err: updateErr,
                         });
                         connection.destroy();
                     } else {
@@ -105,10 +105,10 @@ router.get('/:pid', (req, res) => {
             let queryStatement = `SELECT * FROM stories where pid=${pid} ORDER BY priority DESC;`;
             connection.query(queryStatement, (selectErr, selectData) => {
                 if (selectErr) {
-                    console.log('failed to select all stories of project' + pid + 'from stories table, err: ' + err);
+                    console.log('failed to select all stories of project' + pid + 'from stories table, err: ' + selectErr);
                     res.json({
                         success: false,
-                        err: err,
+                        err: selectErr,
                     });
                     connection.destroy();
                 } else {

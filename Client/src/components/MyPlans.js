@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Axios from 'axios';
 import host from '../lib/serverConfig';
 import './MyPlans.css';
+import TopNav from './TopNav';
 
 const PlanThumbnail = withRouter((props) => {
     const clickHandler = () => {
@@ -63,6 +64,7 @@ function MyPlans(props) {
 
     return (
         <div className='MyPlansPage'>
+            <TopNav />
             <h1 className='myPlansPageTitle'>My Plans</h1>
             {!isLoading && renderPlans()}
             <div className='plansBackground'></div>

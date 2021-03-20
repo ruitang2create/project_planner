@@ -106,3 +106,7 @@
     float: right;
     margin-top: 5px;
 }
+
+.storyEditBtn:hover {
+    filter: drop-shadow(0 0 0 black);
+}

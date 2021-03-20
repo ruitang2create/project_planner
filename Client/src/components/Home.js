@@ -2,10 +2,12 @@ import React from 'react';
 import './Home.css';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import TopNav from './TopNav';
 
 function Home(props) {
     return (
         <div className='HomePage'>
+            <TopNav />
             <h1 className='homeGreeting'>{`Hello, ${props.username}!`}</h1>
             <div className='HomePortals'>
                 <Link to='/new'>

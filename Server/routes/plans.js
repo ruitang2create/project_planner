@@ -20,14 +20,14 @@ router.post('/', (req, res) => {
       } else {
         console.log('Connection succeeded...');
         console.log(pool._allConnections.length);
-        let queryStatement = `INSERT INTO plans (name, description, vision, create_date) VALUES ('${name}', '${description}', '${vision}',${dateline});`;
+        let queryStatement = `INSERT INTO plans (name, description, vision, create_date) VALUES ("${name}", "${description}", "${vision}",${dateline});`;
         queryStatement += `SELECT LAST_INSERT_ID();`;
         connection.query(queryStatement, (insertErr, insertData) => {
           if (insertErr) {
-            console.log('failed at insertion into plans table, err: ' + err);
+            console.log('failed at insertion into plans table, err: ' + insertErr);
             res.json({
               success: false,
-              err: err,
+              err: insertErr,
             });
             connection.destroy();
           } else {
@@ -51,38 +51,38 @@ router.put('/:pid', (req, res) => {
   const { description, vision } = req.body;
   console.log(description, vision);
   if (description && vision) {
-      pool.getConnection((err, connection) => {
-          if (err) {
-              console.log('Connection failed...');
-              console.log(err);
-              res.json({
-                  success: false,
-                  err: err,
-              });
+    pool.getConnection((err, connection) => {
+      if (err) {
+        console.log('Connection failed...');
+        console.log(err);
+        res.json({
+          success: false,
+          err: err,
+        });
+      } else {
+        console.log('Connection succeeded...');
+        console.log(pool._allConnections.length);
+        let queryStatement = `UPDATE plans SET description="${description}", vision="${vision}" WHERE pid=${pid};`;
+        console.log('New attempt: \n' + queryStatement);
+        connection.query(queryStatement, (updateErr, updateData) => {
+          if (updateErr) {
+            console.log('failed to updat plan' + pid + ', err: ' + updateErr);
+            res.json({
+              success: false,
+              err: updateErr,
+            });
+            connection.destroy();
           } else {
-              console.log('Connection succeeded...');
-              console.log(pool._allConnections.length);
-              let queryStatement = `UPDATE plans SET description='${description}', vision='${vision}' WHERE pid=${pid};`;
-              console.log('New attempt: \n' + queryStatement);
-              connection.query(queryStatement, (updateErr, updateData) => {
-                  if (updateErr) {
-                      console.log('failed to updat plan' + pid + ', err: ' + err);
-                      res.json({
-                          success: false,
-                          err: err,
-                      });
-                      connection.destroy();
-                  } else {
-                      console.log('Update feedback: ' + JSON.stringify(updateData));
-                      console.log('Plan' + pid + ' updated...');
-                      res.json({
-                          success: true,
-                      });
-                      connection.destroy();
-                  }
-              });
+            console.log('Update feedback: ' + JSON.stringify(updateData));
+            console.log('Plan' + pid + ' updated...');
+            res.json({
+              success: true,
+            });
+            connection.destroy();
           }
-      });
+        });
+      }
+    });
   }
 });
 
@@ -103,10 +103,10 @@ router.get('/', (req, res) => {
       let queryStatement = `SELECT * FROM plans;`;
       connection.query(queryStatement, (selectErr, selectData) => {
         if (selectErr) {
-          console.log('failed at selecting all plans from plans table, err: ' + err);
+          console.log('failed at selecting all plans from plans table, err: ' + selectErr);
           res.json({
             success: false,
-            err: err,
+            err: selectErr,
           });
           connection.destroy();
         } else {
@@ -123,5 +123,39 @@ router.get('/', (req, res) => {
   });
 });
 
+// Delete plan with given pid from DB.plans
+router.delete('/:pid', (req, res) => {
+  const pid = req.params.pid;
+  console.log('Incoming delete request for plans' + pid + '...');
+  pool.connection((err, connection) => {
+    if (err) {
+      console.log('Connection failed...\nError: ' + err);
+      res.json({
+        success: false,
+        err: err,
+      });
+    } else {
+      console.log('Connection succeeded...');
+      console.log(pool._allConnections.length);
+      let queryStatement = `DELETE FROM plans WHERE pid=${pid};`;
+      connection.query(queryStatement, (deleteErr, deleteData) => {
+        if (deleteErr) {
+          console.log('failed at selecting all plans from plans table, err: ' + deleteErr);
+          res.json({
+            success: false,
+            err: deleteErr,
+          });
+          connection.destroy();
+        } else {
+          console.log(`Plan${pid}: deleted...`);
+          res.json({
+            success: true,
+          });
+          connection.destroy();
+        }
+      });
+    }
+  });
+});
 
 module.exports = router;

@@ -5,6 +5,7 @@ import { Form } from 'react-bootstrap';
 import Axios from 'axios';
 import host from '../lib/serverConfig';
 import { withRouter } from 'react-router-dom';
+import TopNav from './TopNav';
 
 function NewPlan(props) {
     const [projectName, setProjectName] = useState('');
@@ -36,6 +37,7 @@ function NewPlan(props) {
 
     return (
         <div className='NewPlanPage'>
+            <TopNav />
             <h1 className='newPlanPageTitle'>New Project Plan</h1>
             <Form className='newPlanForm' onSubmit={handleSubmit}>
                 <Form.Group controlId='projectNameInput'>

@@ -41,6 +41,7 @@ const UserStory = (props) => {
             } else {
                 console.log('Update failed!');
                 console.log('Story update err: ' + res.data.err);
+                setToUpdate(false);
             }
         }).catch(err => {
             console.log('Axios PUT request err:' + err);
@@ -57,6 +58,11 @@ const UserStory = (props) => {
 
     const checkboxHandler = () => {
         setFinished(!finished);
+        setToUpdate(true);
+    }
+
+    const newPriorityHandler = (newPriority) => {
+        setPriority(newPriority);
         setToUpdate(true);
     }
 
@@ -90,9 +96,9 @@ const UserStory = (props) => {
                         </div>
                         <div className='storyPriorityDisplay'>
                             <DropdownButton variant={colorOfPriority[priority]} id="storyPriorityDropdown" title={textOfPriority[priority]}>
-                                <Dropdown.Item onClick={() => setPriority(2)}>high</Dropdown.Item>
-                                <Dropdown.Item onClick={() => setPriority(1)}>mid</Dropdown.Item>
-                                <Dropdown.Item onClick={() => setPriority(0)}>low</Dropdown.Item>
+                                <Dropdown.Item onClick={() => newPriorityHandler(2)}>high</Dropdown.Item>
+                                <Dropdown.Item onClick={() => newPriorityHandler(1)}>mid</Dropdown.Item>
+                                <Dropdown.Item onClick={() => newPriorityHandler(0)}>low</Dropdown.Item>
                             </DropdownButton>
                         </div>
                     </div>

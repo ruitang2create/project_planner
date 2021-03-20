@@ -32,6 +32,7 @@ function App() {
       } else {
         console.log('Update failed!');
         console.log('Plan update err: ' + res.data.err);
+        setToUpdatePlan(false);
       }
     }).catch(err => {
       console.log('Axios PUT request err:' + err);
