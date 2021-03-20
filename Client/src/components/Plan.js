@@ -179,6 +179,7 @@ function Plan(props) {
                                         value={tempVision}
                                         onChange={e => setTempVision(e.target.value)}
                                         required
+                                        rows={20}
                                     />
                                 </Form.Group>
                                 <Button variant='light' onClick={handleVisionEditModalClose}>Cancel</Button>
