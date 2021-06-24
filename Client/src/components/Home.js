@@ -8,18 +8,20 @@ function Home(props) {
     return (
         <div className='HomePage'>
             <TopNav />
-            <h1 className='homeGreeting'>{`Hello, ${props.username}!`}</h1>
-            <div className='HomePortals'>
-                <Link to='/new'>
-                    <Button variant='outline-dark' className='homePortal newPlanBtn'>
-                        Create New Plan
-                    </Button>
-                </Link>
-                <Link to='/myplans'>
-                <Button variant='dark' className='homePortal myPlansBtn'>
-                    See My Plans
-                </Button>
-                </Link>
+            <div className='HomePageMain'>
+                <h1 className='homeGreeting'>{`Hello, ${props.username}!`}</h1>
+                <div className='HomePortals'>
+                    <Link to='/new' className='homePortalLink'>
+                        <Button variant='outline-dark' className='homePortal'>
+                            Create New Plan
+                        </Button>
+                    </Link>
+                    <Link to='/myplans' className='homePortalLink'>
+                        <Button variant='dark' className='homePortal'>
+                            See My Plans
+                        </Button>
+                    </Link>
+                </div>
             </div>
         </div>
     );

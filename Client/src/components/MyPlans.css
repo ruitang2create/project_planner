@@ -1,15 +1,20 @@
 .myPlansPageTitle {
     position: relative;
-    top: 3em;
     padding-left: 5%;
+    height: 200px;
+    background-color: #fff;
+    font-size: 3rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
 
 .plansListContainer {
     position: relative;
-    top: 10em;
     text-align: center;
     width: 100%;
-    margin-left: 5%;
+    padding: 5%;
 }
 
 .planThumbnailContainer {
@@ -49,10 +54,10 @@
     border-bottom: none;
     border-right: none;
     background: rgb(88, 88, 88);
+    cursor: pointer;
 }
 
-.plansBackground {
-    margin-top: 140px;
+.MyPlansMain {
     background: #f3f3f3;
-    height: 100vh;
+    height: calc(100vh - 56px);
 }

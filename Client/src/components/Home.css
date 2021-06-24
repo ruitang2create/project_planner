@@ -1,25 +1,49 @@
-.HomePortals {
-    position: relative;
+.HomePage {
     text-align: center;
-    margin: 20px 0 10px 0;
-    top: 20em;
+    position: relative;
+    height: 100vh;
+}
+
+.HomePageMain {
+    position: absolute;
+    top: 56px;
+    width: 100%;
+    height: calc(100% - 56px);
+    text-align: center;
+}
+
+.HomePortals {
+    display: grid;
+    padding: 1rem 20%;
+    height: 5rem;
+    font-size: clamp(2rem, 3vw, 3rem);
+}
+
+@media screen and (min-width: 1000px) {
+    .HomePortals {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 5rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .HomePortals {
+        grid-template-columns: 1fr;
+        grid-gap: 2rem;
+    }
 }
 
 .homePortal {
-    height: 10vw;
-    width: 42.5%;
+    height: 100%;
+    width: 100%;
 }
 
-.newPlanBtn {
-    margin: auto auto auto 5%;
-}
-
-.myPlansBtn {
-    margin: auto 5% auto 5%;
+.homePortalLink {
+    text-align: center;
 }
 
 .homeGreeting {
-    position: relative;
-    top: 5em;
-    padding-left: 5%;
+    margin-top: 25vh;
+    margin-bottom: 2rem;
+    font-size: clamp(2rem, 5vw, 4rem);
 }
