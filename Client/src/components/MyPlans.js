@@ -25,8 +25,6 @@ function MyPlans(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [plansList, setPlansList] = useState([]);
 
-    // const text = ()
-
     const getPlans = () => {
         console.log('Fetching plans from server...');
         const apiUrl = `${host}/plans`;
@@ -66,7 +64,7 @@ function MyPlans(props) {
         <div className='MyPlansPage'>
             <TopNav />
             <div className='MyPlansMain'>
-                <div className='myPlansPageTitle'>My Plans</div>
+                <div className='myPlansPageTitle'>My Projects</div>
                 {!isLoading && renderPlans()}
             </div>
         </div>

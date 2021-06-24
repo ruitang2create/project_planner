@@ -13,12 +13,12 @@ function Home(props) {
                 <div className='HomePortals'>
                     <Link to='/new' className='homePortalLink'>
                         <Button variant='outline-dark' className='homePortal'>
-                            Create New Plan
+                            Create New Project
                         </Button>
                     </Link>
                     <Link to='/myplans' className='homePortalLink'>
                         <Button variant='dark' className='homePortal'>
-                            See My Plans
+                            Check My Projects
                         </Button>
                     </Link>
                 </div>

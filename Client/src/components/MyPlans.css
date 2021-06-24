@@ -8,6 +8,7 @@
     display: flex;
     justify-content: left;
     align-items: center;
+    border-bottom: 1px solid #b3b1b1;
 }
 
 .plansListContainer {
@@ -29,12 +30,6 @@
 .plansCol:hover .planThumbnailContainer {
     color: white;
 }
-
-/* .plansRow {
-    width: 100%;
-    text-align: center;
-    margin: 0 2vw 0 2vw;
-} */
 
 .plansCol {
     width: 100px;
