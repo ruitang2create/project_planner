@@ -4,7 +4,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 const TopNav = () => {
     return (
         <Navbar bg='dark' variant='dark'>
-            <Navbar.Brand href='/'>Project Planner</Navbar.Brand>
+            <Navbar.Brand href='/'>Agile Planner</Navbar.Brand>
             <Nav className='topNav'>
                 <Nav.Link href='/'>Home</Nav.Link>
                 <Nav.Link href='/myplans'>Plans</Nav.Link>

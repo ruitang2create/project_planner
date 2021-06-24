@@ -14,8 +14,11 @@
 
 .planThumbnailContainer {
     width: 100%;
+    height: 100%;
     font-size: 20px;
-    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .plansCol:hover .planThumbnailContainer {
@@ -36,6 +39,8 @@
     border-bottom: solid 1px rgb(180, 180, 180);
     border-right: solid 1px rgb(221, 221, 221);
     background: white;
+    justify-content: center;
+    align-items: center;
 }
 
 .plansCol:hover {
