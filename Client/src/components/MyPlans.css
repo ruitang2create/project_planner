@@ -11,6 +11,14 @@
     border-bottom: 1px solid #b3b1b1;
 }
 
+.plansPageAddPlanBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #212529;
+}
+
 .plansListContainer {
     position: relative;
     text-align: center;
@@ -32,6 +40,7 @@
 }
 
 .plansCol {
+    border-radius: 10%;
     width: 100px;
     height: 100px;
     float: left;
@@ -41,6 +50,7 @@
     background: white;
     justify-content: center;
     align-items: center;
+    transition: 0.3s;
 }
 
 .plansCol:hover {
@@ -50,6 +60,7 @@
     border-right: none;
     background: rgb(88, 88, 88);
     cursor: pointer;
+    transform: translateY(-5px);
 }
 
 .MyPlansMain {

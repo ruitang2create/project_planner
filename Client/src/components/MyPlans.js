@@ -5,6 +5,8 @@ import host from '../lib/serverConfig';
 import './MyPlans.css';
 import TopNav from './TopNav';
 import Helmet from 'react-helmet';
+import { IoAddOutline } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
 const PlanThumbnail = withRouter((props) => {
     const clickHandler = () => {
@@ -57,6 +59,11 @@ function MyPlans(props) {
         return (
             <div className='plansListContainer'>
                 {plansRows}
+                <Link to='/new' className='homePortalLink'>
+                    <div className='plansCol plansPageAddPlanBtn'>
+                        <IoAddOutline />
+                    </div>
+                </Link>
             </div>
         );
     }
