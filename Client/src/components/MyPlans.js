@@ -4,6 +4,7 @@ import Axios from 'axios';
 import host from '../lib/serverConfig';
 import './MyPlans.css';
 import TopNav from './TopNav';
+import Helmet from 'react-helmet';
 
 const PlanThumbnail = withRouter((props) => {
     const clickHandler = () => {
@@ -62,6 +63,10 @@ function MyPlans(props) {
 
     return (
         <div className='MyPlansPage'>
+            <Helmet>
+                <title>Project Plans</title>
+                <meta name="description" content="Project plans that've been created" />
+            </Helmet>
             <TopNav />
             <div className='MyPlansMain'>
                 <div className='myPlansPageTitle'>My Projects</div>
