@@ -9,4 +9,4 @@
    ```
    git clone https://github.com/ruitang2create/project_planner.git
    ```
-2. Check **README** in [Client](https://github.com/ruitang2create/project_planner/tree/main/Client) and [Server](https://github.com/ruitang2create/project_planner/tree/main/Server) for setup details.
+2. Check **README** of [Client](https://github.com/ruitang2create/project_planner/tree/main/Client) and [Server](https://github.com/ruitang2create/project_planner/tree/main/Server) for setup details.

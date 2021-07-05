@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Card, Button, Modal, Form, Col, InputGroup, Accordion } from 'react-bootstrap';
 import StoriesWall from './StoriesWall';
 import Axios from 'axios';
-import host from '../lib/serverConfig';
+import serverUrl from '../lib/serverInfo';
 import './Plan.css';
 import editIcon from '../assets/imgs/editIcon_black.png';
 import deleteIcon from '../assets/imgs/deleteIcon_red.png';
@@ -72,7 +72,7 @@ function Plan(props) {
 
     const getStories = () => {
         console.log('Fetching stories of Project' + props.pid + '...');
-        const apiUrl = `${host}/stories/${props.pid}`;
+        const apiUrl = `${serverUrl}/stories/${props.pid}`;
         Axios.get(apiUrl)
             .then(res => {
                 if (res.data.success) {
@@ -90,7 +90,7 @@ function Plan(props) {
         console.log('Sending request to insert new story...');
         event.preventDefault();
         handleModalClose();
-        const apiUrl = `${host}/stories/${props.pid}`;
+        const apiUrl = `${serverUrl}/stories/${props.pid}`;
         Axios.post(apiUrl, {
             title: newStoryTitle,
             content: newStoryContent,
@@ -112,12 +112,12 @@ function Plan(props) {
 
     const deletePlanHandler = () => {
         handleDeleteModalClose();
-        let apiUrl = `${host}/stories/plan/${props.pid}`;
+        let apiUrl = `${serverUrl}/stories/plan/${props.pid}`;
         Axios.delete(apiUrl).then(res => {
             console.log('Deleting stories of plan' + props.pid + '...');
             if (res.data.success) {
                 console.log('Stories of plan' + props.pid + ' deleted!');
-                apiUrl = `${host}/plans/${props.pid}`;
+                apiUrl = `${serverUrl}/plans/${props.pid}`;
                 Axios.delete(apiUrl).then(res => {
                     console.log('Deleting plan' + props.pid + '...');
                     if (res.data.success) {

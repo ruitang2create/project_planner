@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Form, Button, Modal, DropdownButton, Dropdown } from 'react-bootstrap';
 import Checkbox from './Checkbox';
 import Axios from 'axios';
-import host from '../lib/serverConfig';
+import serverUrl from '../lib/serverInfo';
 import './UserStory.css';
 import editIcon from '../assets/imgs/editIcon_black.png';
 import deleteIcon from '../assets/imgs/deleteIcon_black.png';
@@ -33,7 +33,7 @@ const UserStory = (props) => {
 
 
     const storyUpdater = () => {
-        const apiUrl = `${host}/stories/${props.sid}`;
+        const apiUrl = `${serverUrl}/stories/${props.sid}`;
         Axios.put(apiUrl, {
             title: title,
             content: content,
@@ -75,7 +75,7 @@ const UserStory = (props) => {
 
     const deleteStoryHandler = () => {
         handleDeleteModalClose();
-        const apiUrl = `${host}/stories/${props.sid}`;
+        const apiUrl = `${serverUrl}/stories/${props.sid}`;
         Axios.delete(apiUrl).then(res => {
             if (res.data.success) {
                 console.log('Story deleted!');

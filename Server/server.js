@@ -9,11 +9,11 @@ const bodyParser = require('body-parser');
 
 const plansRouter = require('./routes/plans');
 const storiesRouter = require('./routes/stories');
-const port = 8080;
+const serverUrl = require('./lib/config');
 
 const app = express();
 app.use(cors({
-  origin: ["http://projectplanner.ruitangcs.com","http://192.168.100.108:3000", "http://localhost:3000"],
+  origin: ["http://projectplanner.ruitangcs.com",`${serverUrl.address}:3000`, "http://localhost:3000"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
@@ -63,6 +63,6 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-app.listen(port, () => console.log('Listening on port: ' + port + '...'));
+app.listen(port, () => console.log('Listening on port: ' + serverUrl.port + '...'));
 
 module.exports = app;

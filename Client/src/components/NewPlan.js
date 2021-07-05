@@ -3,7 +3,7 @@ import './NewPlan.css';
 import Button from 'react-bootstrap/Button';
 import { Form } from 'react-bootstrap';
 import Axios from 'axios';
-import host from '../lib/serverConfig';
+import serverUrl from '../lib/serverInfo';
 import { withRouter } from 'react-router-dom';
 import TopNav from './TopNav';
 
@@ -16,7 +16,7 @@ function NewPlan(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const apiUrl = `${host}/plans`;
+        const apiUrl = `${serverUrl}/plans`;
         Axios.post(apiUrl, {
             name: projectName,
             description: projectDescription,

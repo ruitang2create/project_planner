@@ -9,7 +9,7 @@ import NewPlan from './components/NewPlan';
 import MyPlans from './components/MyPlans';
 import Plan from './components/Plan';
 import Axios from 'axios';
-import host from './lib/serverConfig';
+import serverUrl from './lib/serverInfo';
 
 function App() {
   const [planPid, setPlanPid] = useState(-1);
@@ -21,7 +21,7 @@ function App() {
 
   const planUpdater = () => {
     console.log('Sending request to update plan...');
-    const apiUrl = `${host}/plans/${planPid}`;
+    const apiUrl = `${serverUrl}/plans/${planPid}`;
     Axios.put(apiUrl, {
       description: planDesc,
       vision: planVision,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import Axios from 'axios';
-import host from '../lib/serverConfig';
+import serverUrl from '../lib/serverInfo';
 import './MyPlans.css';
 import TopNav from './TopNav';
 import Helmet from 'react-helmet';
@@ -30,7 +30,7 @@ function MyPlans(props) {
 
     const getPlans = () => {
         console.log('Fetching plans from server...');
-        const apiUrl = `${host}/plans`;
+        const apiUrl = `${serverUrl}/plans`;
         Axios.get(apiUrl)
             .then(res => {
                 if (res.data.success) {
