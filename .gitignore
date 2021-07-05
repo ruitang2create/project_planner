@@ -7,6 +7,8 @@
 
 # Server Config
 /Client/src/lib/serverConfig.js
+/Server/lib/config.js
+/Server/lib/dbpool.js
 
 # Page Protection Credentials
 /Client/src/lib/lock.js

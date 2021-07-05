@@ -14,13 +14,11 @@
      ```
      npm install
      ```
-     (The Client is using yarn by default. If you want to use npm, delete **yarn.lock** under Client root folder.)
+     (The Server is using npm by default. If you want to use yarn, delete **package-lock.json** under Server root folder.)
 
 3. ##### Constants configuration:
-
-   - Create a **lib** folder under **./Client/src/**:
-   - Create a **serverConfig.js** file under **./Client/src/lib/**
-   - Copy and paste following code into **serverInfo.js**:
+    - Set server address:
+    Go to **./Server/lib/config
 
      ```js
      const port = "8080";
@@ -41,16 +39,3 @@
   ```
   npm start
   ```
-
-## Build
-
-- yarn:
-  ```
-  yarn build
-  ```
-- npm:
-  ```
-  npm build
-  ```
-
-  Static files will be generated under **./Client/build/** folder.
