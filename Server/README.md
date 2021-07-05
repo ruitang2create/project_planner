@@ -18,43 +18,43 @@
 
 3.  #### Constants configuration:
 
-- **Server Address Configuration**:
+    - **Server Address Configuration**:
 
-  - Create a **lib** folder under **./Server/**:
-  - Create a **config.js** file under **./Server/lib/**
-  - Copy and paste following code into **config.js**:
+        - Create a **lib** folder under **./Server/**:
+        - Create a **config.js** file under **./Server/lib/**
+        - Copy and paste following code into **config.js**:
 
-    ```js
-    const serverAddress = "http://192.168.100.108";
-    const serverPort = "8080";
-    const serverURL = {
-      address: serverAddress,
-      port: serverPort,
-    };
+            ```js
+            const serverAddress = "http://192.168.100.108";
+            const serverPort = "8080";
+            const serverURL = {
+            address: serverAddress,
+            port: serverPort,
+            };
 
-    module.exports = serverURL;
-    ```
+            module.exports = serverURL;
+            ```
 
-  - Set the value of **`serverAddress`** with the address where your server is running.
-  - Set the value of **`serverPort`** with the port you want. If you set it to any value other than `8080`, you should also update the port value in Client side config file which is at **./Client/src/lib/serverInfo.js**.
+        - Set the value of **`serverAddress`** with the address where your server is running.
+        - Set the value of **`serverPort`** with the port you want. If you set it to any value other than `8080`, you should also update the port value in Client side config file which is at **./Client/src/lib/serverInfo.js**.
 
-- **Database Configuration**:
-  - Create a **dbpool.js** file under **./Server/lib/**
-  - Copy and paste following code into **dbpool.js**:
+    - **Database Configuration**:
+        - Create a **dbpool.js** file under **./Server/lib/**
+        - Copy and paste following code into **dbpool.js**:
 
-    ```js
-    const mysql = require('mysql');
-    const myDB = {
-        host: 'The address of your database',
-        port: 'The port of your DB(3306 is default port of MySQL DB)',
-        user: 'The username of your database',
-        password: 'The password of your database',
-        database: 'The schema name of your database',
-        multipleStatements: true,
-    };
-    const pool = mysql.createPool(myDB);
-    module.exports = pool;
-    ```
+            ```js
+            const mysql = require('mysql');
+            const myDB = {
+                host: 'The address of your database',
+                port: 'The port of your DB(3306 is default port of MySQL DB)',
+                user: 'The username of your database',
+                password: 'The password of your database',
+                database: 'The schema name of your database',
+                multipleStatements: true,
+            };
+            const pool = mysql.createPool(myDB);
+            module.exports = pool;
+            ```
 
 ## Develop
 
