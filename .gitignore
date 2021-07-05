@@ -6,7 +6,7 @@
 /Client/build
 
 # Server Config
-/Client/src/lib/serverConfig.js
+/Client/src/lib/serverInfo.js
 /Server/lib/config.js
 /Server/lib/dbpool.js
 
